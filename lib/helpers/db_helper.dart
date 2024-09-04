@@ -31,12 +31,12 @@ class ProductProvider {
     return product;
   }
 
-  Future getproduct() async {
+  Future<List<Product>> getproduct() async {
     final result = await db!.query(productstable);
     for (var item in result) {
       isfavourite.addAll({item["id"] as int: true});
     }
-    return result;
+    return result.map((item) => Product.fromMap(item)).toList();
   }
 
   Future<int> deleteproduct(int id) async {

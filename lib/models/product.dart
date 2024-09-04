@@ -28,6 +28,9 @@ class Product {
       rate: Rateing.fromJson(json['rating']),
     );
   }
+  factory Product.fromMap(Map<String, dynamic> Map) {
+    return Product(id: Map["id"], title: Map["title"], image: Map["image"]);
+  }
   Map<String, dynamic> toMap() {
     return {"id": id, "title": title, "image": image};
   }
