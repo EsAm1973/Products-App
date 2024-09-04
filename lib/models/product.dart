@@ -28,8 +28,10 @@ class Product {
       rate: Rateing.fromJson(json['rating']),
     );
   }
+  Map<String, dynamic> toMap() {
+    return {"id": id, "title": title, "image": image};
+  }
 }
-
 
 class Rateing {
   final double rate;

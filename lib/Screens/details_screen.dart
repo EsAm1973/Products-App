@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:practice/models/product.dart';
+import 'package:practice/widgets/Handlefav.dart';
 import 'package:rate/rate.dart';
 
 class DetailsScreen extends StatefulWidget {
@@ -14,6 +15,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+              setState(() {});
+            },
+            icon: (Icon(Icons.arrow_back))),
         title: const Text(
           'Details',
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
@@ -22,7 +29,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
         backgroundColor: Colors.deepPurple,
         foregroundColor: Colors.white,
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.favorite))
+          Handlefav(
+            product: widget.product,
+          )
         ],
       ),
       body: Center(
@@ -83,7 +92,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
