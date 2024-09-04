@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:practice/Screens/details_screen.dart';
 import 'package:practice/Screens/favourite.dart';
@@ -23,7 +22,8 @@ class _FavlistState extends State<Favlist> {
           Stack(children: [
             InkWell(
                 onTap: () {
-                  if (widget.product.image != null && widget.product.title != null) {
+                  if (widget.product.image != null &&
+                      widget.product.title != null) {
                     Navigator.of(context)
                         .push(MaterialPageRoute(
                             builder: (context) => DetailsScreen(
@@ -48,15 +48,16 @@ class _FavlistState extends State<Favlist> {
                 right: 8,
                 child: IconButton(
                     onPressed: () async {
-                      await productProvider
-                          .deleteproduct(widget.product.id!)
-                          .then(
-                        (value) {
-                          ProductProvider().isfavourite[widget.product.id!] =
-                              false;
-                        },
-                      );
-                      setState(() {});
+                      await productProvider.deleteproduct(widget.product.id!);
+                      //     .then(
+                      //   (value) {
+                      //     ProductProvider().isfavourite[widget.product.id!] =
+                      //         false;
+                      //   },
+                      // );
+                      setState(() {
+                        productProvider.isfavourite.remove(widget.product.id!);
+                      });
                     },
                     icon: const Icon(
                       Icons.favorite,
