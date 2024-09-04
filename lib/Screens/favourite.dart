@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:practice/Screens/details_screen.dart';
 import 'package:practice/helpers/db_helper.dart';
 import 'package:practice/models/product.dart';
 import 'package:practice/widgets/favlist.dart';
@@ -35,7 +34,7 @@ class _FavouriteState extends State<Favourite> {
                 );
               } else if (snapshot.hasError) {
                 return const Center(
-                  child: Text('Falid to load products'),
+                  child: Text('Failed to load products'),
                 );
               } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                 return const Center(

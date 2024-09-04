@@ -1,16 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:practice/Screens/cart_screen.dart';
 import 'package:practice/Screens/favourite.dart';
 import 'package:practice/Screens/home_page.dart';
+import 'package:practice/Screens/info_screen.dart';
+import 'package:practice/Screens/profile.dart';
 
 class BottomNavigation extends StatefulWidget {
-  BottomNavigation({super.key});
+  const BottomNavigation({super.key});
 
+  @override
   _BottomNavigationState createState() => _BottomNavigationState();
 }
 
 class _BottomNavigationState extends State<BottomNavigation> {
   int currentindex = 0;
-  List<Widget> pages = [HomePage(), Favourite()];
+  List<Widget> pages = [
+    const HomePage(),
+    Favourite(),
+    const Cart(),
+    const Info(),
+    const Profile()
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(

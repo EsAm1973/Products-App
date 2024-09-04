@@ -24,10 +24,18 @@ class _HandlefavState extends State<Handlefav> {
               );
               setState(() {});
             },
-            icon: const Icon(
-              Icons.favorite,
-              color: Colors.red,
-              size: 20,
+            icon: Container(
+              width: 30,
+              height: 30,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.black.withOpacity(0.50),
+              ),
+              child: const Icon(
+                Icons.favorite,
+                color: Colors.red,
+                size: 20,
+              ),
             ))
         : IconButton(
             onPressed: () async {
@@ -38,10 +46,18 @@ class _HandlefavState extends State<Handlefav> {
               );
               setState(() {});
             },
-            icon: const Icon(
-              Icons.favorite,
-              size: 20,
-              color: Colors.white,
+            icon: Container(
+              width: 30,
+              height: 30,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.black.withOpacity(0.50),
+              ),
+              child: const Icon(
+                Icons.favorite,
+                size: 20,
+                color: Colors.white,
+              ),
             ));
   }
 }

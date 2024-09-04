@@ -4,6 +4,11 @@ import 'package:sqflite/sqflite.dart';
 
 final String ColumnId = "id";
 final String Columntitle = "title";
+final String price = "price";
+final String description = "description";
+final String category = "category";
+final String ratingRate = "rating_rate";
+final String ratingCount = "rating_count";
 final String Columnimage = "image";
 final String productstable = "products_table";
 
@@ -21,7 +26,7 @@ class ProductProvider {
       version: 1,
       onCreate: (db, version) async {
         await db.execute(
-            "CREATE TABLE $productstable($ColumnId INTEGER,$Columntitle TEXT NOT NULL,$Columnimage TEXT NOT NULL)");
+            "CREATE TABLE $productstable($ColumnId INTEGER,$Columntitle TEXT NOT NULL,$Columnimage TEXT NOT NULL, $price REAL, $description TEXT, $category TEXT, $ratingRate REAL, $ratingCount INTEGER)");
       },
     );
   }

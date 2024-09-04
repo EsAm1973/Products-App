@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 class Product {
   final int? id;
   final String? title;
@@ -7,6 +6,7 @@ class Product {
   final String? description;
   final String? image;
   final Rateing? rate;
+
   Product({
     this.id,
     this.title,
@@ -21,24 +21,49 @@ class Product {
     return Product(
       id: json['id'],
       title: json['title'],
-      price: json['price'].toDouble(),
+      price: json['price']?.toDouble(),
       category: json['category'],
       description: json['description'],
       image: json['image'],
       rate: Rateing.fromJson(json['rating']),
     );
   }
-  factory Product.fromMap(Map<String, dynamic> Map) {
-    return Product(id: Map["id"], title: Map["title"], image: Map["image"]);
+
+  factory Product.fromMap(Map<String, dynamic> map) {
+    return Product(
+      id: map["id"],
+      title: map["title"],
+      image: map["image"],
+      price: map["price"]?.toDouble(),
+      description: map["description"],
+      category: map["category"],
+      rate: map["rating_rate"] != null && map["rating_count"] != null
+          ? Rateing(
+              rate: map["rating_rate"]?.toDouble() ?? 0.0,
+              count: map["rating_count"] ?? 0,
+            )
+          : null,
+    );
   }
+
   Map<String, dynamic> toMap() {
-    return {"id": id, "title": title, "image": image};
+    return {
+      "id": id,
+      "title": title,
+      "image": image,
+      "price": price,
+      "description": description,
+      "category": category,
+      "rating_rate": rate?.rate,
+      "rating_count": rate?.count
+    };
   }
 }
 
 class Rateing {
   final double rate;
   final int count;
+
   Rateing({
     required this.rate,
     required this.count,

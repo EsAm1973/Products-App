@@ -6,6 +6,7 @@ import 'package:rate/rate.dart';
 class DetailsScreen extends StatefulWidget {
   const DetailsScreen({super.key, required this.product});
   final Product product;
+
   @override
   State<DetailsScreen> createState() => _DetailsScreenState();
 }
@@ -20,7 +21,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
               Navigator.pop(context);
               setState(() {});
             },
-            icon: (Icon(Icons.arrow_back))),
+            icon: const Icon(Icons.arrow_back)),
         title: const Text(
           'Details',
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
@@ -40,7 +41,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
           child: Column(
             children: [
               Image.network(
-                widget.product.image!,
+                widget.product.image ?? 'https://via.placeholder.com/300',
                 width: 300,
                 height: 300,
               ),
@@ -48,7 +49,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 height: 20,
               ),
               Text(
-                widget.product.title!,
+                widget.product.title ?? 'No Title',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style:
@@ -58,8 +59,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 height: 10,
               ),
               Text(
+                widget.product.description ?? 'No Description Available',
                 maxLines: 5,
-                widget.product.description!,
+                overflow: TextOverflow.ellipsis,
                 style:
                     const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
               ),
@@ -73,26 +75,26 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     color: Colors.yellow.shade700,
                     allowHalf: true,
                     allowClear: true,
-                    initialValue: widget.product.rate!.rate,
+                    initialValue: widget.product.rate?.rate ?? 0.0,
                     readOnly: true,
                   ),
                   const SizedBox(
                     width: 10,
                   ),
                   Text(
-                    '${widget.product.rate!.rate}',
+                    '${widget.product.rate?.rate ?? 0.0}',
                     style: const TextStyle(
                         fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   const Spacer(),
                   Text(
-                    '\$${widget.product.price}',
+                    '\$${widget.product.price ?? 0.0}',
                     style: const TextStyle(
                         fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               SizedBox(

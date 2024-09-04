@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 import 'package:practice/Screens/details_screen.dart';
 import 'package:practice/Screens/favourite.dart';
@@ -23,17 +23,23 @@ class _FavlistState extends State<Favlist> {
           Stack(children: [
             InkWell(
                 onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(
-                          builder: (context) => DetailsScreen(
-                                product: widget.product,
-                              )))
-                      .then((value) {
-                    setState(() {});
-                  });
+                  if (widget.product.image != null && widget.product.title != null) {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(
+                            builder: (context) => DetailsScreen(
+                                  product: widget.product,
+                                )))
+                        .then((value) {
+                      setState(() {});
+                    });
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Product data is incomplete')),
+                    );
+                  }
                 },
                 child: Image.network(
-                  widget.product.image!,
+                  widget.product.image ?? 'https://via.placeholder.com/150',
                   width: 150,
                   height: 150,
                 )),
@@ -58,7 +64,7 @@ class _FavlistState extends State<Favlist> {
                     )))
           ]),
           Text(
-            widget.product.title!,
+            widget.product.title ?? 'No Title',
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
             style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
