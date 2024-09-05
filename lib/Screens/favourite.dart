@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:practice/Screens/details_screen.dart';
 import 'package:practice/helpers/db_helper.dart';
 import 'package:practice/models/product.dart';
 import 'package:practice/widgets/favlist.dart';
@@ -50,7 +51,73 @@ class _FavouriteState extends State<Favourite> {
                             crossAxisSpacing: 20),
                     itemBuilder: (context, index) {
                       Product product = snapshot.data![index];
-                      return Favlist(product: product);
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            Stack(children: [
+                              InkWell(
+                                  onTap: () {
+                                    if (product.image != null &&
+                                        product.title != null) {
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(
+                                              builder: (context) =>
+                                                  DetailsScreen(
+                                                    product: product,
+                                                  )))
+                                          .then((value) {
+                                        setState(() {});
+                                      });
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                            content: Text(
+                                                'Product data is incomplete')),
+                                      );
+                                    }
+                                  },
+                                  child: Image.network(
+                                    product.image ??
+                                        'https://via.placeholder.com/150',
+                                    width: 150,
+                                    height: 150,
+                                  )),
+                              Positioned(
+                                  top: 8,
+                                  right: 8,
+                                  child: IconButton(
+                                      onPressed: () async {
+                                        await productProvider
+                                            .deleteproduct(product.id!)
+                                            .then(
+                                          (value) {
+                                            ProductProvider()
+                                                    .isfavourite[product.id!] =
+                                                false;
+                                          },
+                                        );
+                                        setState(() {
+                                          productProvider.isfavourite
+                                              .remove(product.id!);
+                                        });
+                                      },
+                                      icon: const Icon(
+                                        Icons.favorite,
+                                        color: Colors.red,
+                                      )))
+                            ]),
+                            Text(
+                              product.title ?? 'No Title',
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              style: const TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                      );
                     });
               }
             }));

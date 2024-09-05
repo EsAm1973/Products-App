@@ -48,13 +48,14 @@ class _FavlistState extends State<Favlist> {
                 right: 8,
                 child: IconButton(
                     onPressed: () async {
-                      await productProvider.deleteproduct(widget.product.id!);
-                      //     .then(
-                      //   (value) {
-                      //     ProductProvider().isfavourite[widget.product.id!] =
-                      //         false;
-                      //   },
-                      // );
+                      await productProvider
+                          .deleteproduct(widget.product.id!)
+                          .then(
+                        (value) {
+                          ProductProvider().isfavourite[widget.product.id!] =
+                              false;
+                        },
+                      );
                       setState(() {
                         productProvider.isfavourite.remove(widget.product.id!);
                       });

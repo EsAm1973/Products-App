@@ -18,7 +18,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.of(context).pop(true);
               setState(() {});
             },
             icon: const Icon(Icons.arrow_back)),
